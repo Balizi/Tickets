@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,19 @@ class PostsController extends Controller
         return view('dashboard',['data'=>$data]);
     }
 
+    
+
+    public function try()
+    {
+        $data=Post::all();
+        return view('posts',['data'=>$data]);
+    }
+
+    public function posts()
+    {
+
+    }
+
     public function create()
     {
         //
@@ -22,14 +36,23 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        $data=Post::all();
         $this->validate($request,['title'=>'required','content'=>'required','service'=>'required']);
         $post=new Post();
         $post->title=$request->title;
         $post->content=$request->content;
-        $post->service=$request->service;
+
+        $post->user_id=auth()->user()->id;
+        $post->service_id=$request->service;
+        $post->status_id=1;
+
         $post->save();
+        $data=Service::all();
         return view('AddPosts',['services'=>$data]);
+    }
+
+    public function addAnswer()
+    {
+        return "end point";
     }
 
     public function destroy($id)
@@ -54,4 +77,5 @@ class PostsController extends Controller
         DB::update('update posts set title=?, service=?, content=? WHERE id=?',[$title,$service,$content,$id]);
         return redirect('user/dashboard')->with('success','Data Updated');
     }
+
 }

@@ -37,8 +37,8 @@
                               </div>
                               <div class="inline-block relative w-64">
                                 <select name="service" class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                    @foreach ($services as $post)
-                                        <option>{{$post['service']}} </option>
+                                    @foreach ($services as $service)
+                                      <option value="{{$service->id}}">{{$service->service}} </option>
                                     @endforeach
                                 </select>
                               </div>

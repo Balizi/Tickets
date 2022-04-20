@@ -12,6 +12,7 @@ class ServiceController extends Controller
     {
         $role=Auth::user()->role;
         $data=Service::all();
+        // dd($data);
         if($role=='1')
         {
             return view('admin',['services'=>$data]);

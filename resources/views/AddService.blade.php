@@ -17,6 +17,9 @@
                   <li class="nav-item">
                     <a class="nav-link active" href="{{url('/admin/AddService')}}">Add Service</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url('/admin/posts')}}">Show Posts</a>
+                  </li>
                 </ul>
               </div>
             </div>

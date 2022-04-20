@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ServiceController;
 
 /*
@@ -34,6 +35,13 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::post('/AddService',[ServiceController::class,"store"]);
 });
 
+
+Route::prefix('admin')->middleware('auth')->group(function(){
+    Route::get('/posts',[PostsController::class,"try"]);
+});
+
+
+
 //Delete
 Route::get('admin/admin/delete/{id}',[ServiceController::class,'destroy']);
 
@@ -59,10 +67,14 @@ Route::prefix('user')->middleware('auth')->group(function(){
 
 Route::prefix('user')->middleware('auth')->group(function(){
     Route::get('/dashboard', [PostsController::class,"index"]);
-    // return view('dashboard',[ServiceController::class,"index"]);
 });
 
 Route::get('user/dashboard/delete/{id}',[PostsController::class,'destroy']);
 
 Route::get('user/edit/{id}',[PostsController::class,'edit']);
 Route::post('/user/update/{id}',[PostsController::class,'update']);
+
+
+
+Route::get('/admin/answer/{id}',[CommentController::class,'show']);
+Route::post('/admin/answer/{id}',[CommentController::class,'store']);

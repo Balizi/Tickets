@@ -32,20 +32,20 @@
                         <div class="w-full max-w-xs">
                             <form class="rounded px-8  pb-8 mb-4" action="{{ url('user/AddPosts')}}" method="POST">
                                 @foreach ($data as $item)
-                                    <div class="card mb-4">
-                                        <div class="card-header">
-                                            Service : <strong>{{$item['service']}}</strong>
-                                        </div>
-                                        <div class="card-body">
-                                        <h5 class="card-title">Special title treatment</h5>
-                                        <p class="card-text">Content : {{$item['content']}}</p>
-                                        <a href="{{url("user/dashboard/delete/".$item['id'])}}" class="btn btn-danger">Delete</a>
-                                        <a href="{{url("user/edit/".$item['id'])}}" class="btn btn-warning">Edit</a>
-                                        </div>
-                                        <div class="card-footer">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam.
-                                        </div>
-                                    </div>
+                                  <div class="card mb-4">
+                                      <div class="card-header">
+                                        Title : <strong>{{$item['title']}}</strong>
+                                        <span style="float: right">Service : <strong>{{$item->service->service}}</strong></span>
+                                      </div>
+                                      <div class="card-body">
+                                      <p class="card-text mb-2">Content : {{$item['content']}}</p>
+                                      <a href="{{url("user/dashboard/delete/".$item['id'])}}" class="btn btn-danger">Delete</a>
+                                      <a href="{{url("user/edit/".$item['id'])}}" class="btn btn-warning">Edit</a>
+                                      </div>
+                                      <div class="card-footer">
+                                        Status : {{$item->status->status}}
+                                      </div>
+                                  </div>
                                 @endforeach
                             </form>
                           </div>
