@@ -24,7 +24,8 @@ Route::get('/redirects',[ServiceController::class,"index"]);
 
 
 Route::prefix('admin')->middleware('auth')->group(function(){
-    Route::get('/admin',[ServiceController::class,"index"]);
+    // Route::get('/admin',[ServiceController::class,"index"]);
+    Route::get('/admin',[ServiceController::class,"afficher"]);
 });
 
 
@@ -60,7 +61,8 @@ Route::middleware([
 
 
 Route::prefix('user')->middleware('auth')->group(function(){
-    Route::get('/AddPosts', [ServiceController::class,"index"]);
+    // Route::get('/AddPosts', [ServiceController::class,"index"]);
+    Route::get('/AddPosts', [ServiceController::class,"Redirect"]);
     Route::post('/AddPosts',[PostsController::class,"store"]);
 });
 

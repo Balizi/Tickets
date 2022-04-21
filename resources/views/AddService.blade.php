@@ -12,13 +12,13 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url('/admin/posts')}}">Show Posts</a>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{url('admin/admin')}}">Show Services</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link active" href="{{url('/admin/AddService')}}">Add Service</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url('/admin/posts')}}">Show Posts</a>
                   </li>
                 </ul>
               </div>

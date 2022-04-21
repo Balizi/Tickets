@@ -13,7 +13,7 @@ class PostsController extends Controller
     public function index()
     {
         $data=Post::all();
-        return view('dashboard',['data'=>$data]);
+        return view('dashboard',['dataPost'=>$data]);
     }
 
     

@@ -13,6 +13,9 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{{url('/admin/posts')}}">Show Posts</a>
+                  </li>
+                  <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="{{url('admin/admin')}}">Show Service</a>
                   </li>
                   <li class="nav-item">
@@ -31,13 +34,27 @@
                     <div class="row">
                       <div class="col-md-6 mx-auto">
                         <div class="w-full max-w-xs">
-                            <h2>Post id : {{$postId}}</h2>
-                            <h2>login Id : {{$user_id}}</h2>
-                            <form class="rounded px-8  pb-8 mb-4" action="{{ url('admin/answer/'.$postId)}}" method="POST">
-                                @csrf
-                              
+                            <p class="text-center"><strong >Details</strong></p>
+                            <h1 class="mb-2"><b>Title</b> : {{$postDetails[0]->title}}</h1>
+                            <h2 class="mb-2"><b>Content</b> : {{$postDetails[0]->content}}</h2>
+                            <h2 class="mb-2"><b>Status</b> : {{$StatusComment[0]->status}}</h2>
+                            <p class="text-center"><strong >Comment</strong></p>
 
-                              <div class="inline-block relative w-64 mb-4 mt-4">
+
+
+                            @foreach($CommentDetail as $cm)
+                              @if ($cm->role=="0")
+                                <div  style="float: right;color:#a0a0a0;" >{{$cm->name}} {{$cm->created_at}}</div>
+                                <div style="float: right;color:red;" class="mt-2">{{$cm->answer}}</div>
+                                @else
+                                <p style="float: left;color:#a0a0a0;" >{{$cm->name}}</p>
+                                <p style="float: left;" class="pt-3">{{$cm->answer}}</p>
+                              @endif
+                            @endforeach
+
+                            <form class="rounded px-8  pb-8 mb-4" style="margin-top: 40px" action="{{ url('admin/answer/'.$postId)}}" method="POST">
+                              @csrf
+                              <div class="inline-block relative w-64 mb-4">
                                   <input type="hidden" name="">
                                 <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                                     Answer

@@ -31,22 +31,42 @@
                       <div class="col-md-6 mx-auto">
                         <div class="w-full max-w-xs">
                             <form class="rounded px-8  pb-8 mb-4" action="{{ url('user/AddPosts')}}" method="POST">
-                                @foreach ($data as $item)
+                                @foreach ($dataPost as $item)
                                   <div class="card mb-4">
                                       <div class="card-header">
                                         Title : <strong>{{$item['title']}}</strong>
                                         <span style="float: right">Service : <strong>{{$item->service->service}}</strong></span>
                                       </div>
                                       <div class="card-body">
-                                      <p class="card-text mb-2">Content : {{$item['content']}}</p>
+                                      <p class="card-text mb-2">Content : {{$item['content']}}</p> 
                                       <a href="{{url("user/dashboard/delete/".$item['id'])}}" class="btn btn-danger">Delete</a>
                                       <a href="{{url("user/edit/".$item['id'])}}" class="btn btn-warning">Edit</a>
+                                      <a href="{{url("user/edit/".$item['id'])}}" class="btn btn-success">Answer</a>
                                       </div>
                                       <div class="card-footer">
                                         Status : {{$item->status->status}}
                                       </div>
                                   </div>
                                 @endforeach
+
+                                {{-- @foreach ($dataPost as $item)
+                                    <h2>Title : {{$item->title}}</h2>
+                                    <h2>Content : {{$item->content}}</h2>
+                                    <h2>id : {{$item->id}}</h2>
+                                    <h2>status : {{$item->status}}</h2>
+                                    <h2>Services : {{$item->service->service}}</h2>
+                                @endforeach --}} 
+
+                                 {{-- {{print_r($dataPost)}} --}}
+                                 {{-- {{print_r($dataPost)}} --}}
+
+                                  {{-- @foreach($dataPost as $item)
+                                    <h2>title : {{$item['title']}}</h2>
+                                    <h2>srvice : {{$item->service->service}}</h2>
+                                    <h2>content : {{$item['content']}}</h2>
+                                    <h2>status : {{$item->status->status}}</h2>
+                                    <h2>----------------</h2>
+                                  @endforeach --}}
                             </form>
                           </div>
                       </div>
