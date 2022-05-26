@@ -38,13 +38,17 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 
 
 Route::prefix('admin')->middleware('auth')->group(function(){
-    Route::get('/posts',[PostsController::class,"try"]);
+    Route::get('/posts',[PostsController::class,"getAll"]);
 });
 
+Route::prefix('admin')->middleware('auth')->group(function(){
+    Route::get('/listuser',[PostsController::class,"ListUser"]);
+});
 
 
 //Delete
 Route::get('admin/admin/delete/{id}',[ServiceController::class,'destroy']);
+Route::get('admin/deleteuser/{id}',[ServiceController::class,'deleteuser']);
 
 Route::middleware([
     'auth:sanctum',
@@ -74,9 +78,15 @@ Route::prefix('user')->middleware('auth')->group(function(){
 Route::get('user/dashboard/delete/{id}',[PostsController::class,'destroy']);
 
 Route::get('user/edit/{id}',[PostsController::class,'edit']);
-Route::post('/user/update/{id}',[PostsController::class,'update']);
+// Route::post('/user/update/{id}',[PostsController::class,'update']);
 
 
 
 Route::get('/admin/answer/{id}',[CommentController::class,'show']);
 Route::post('/admin/answer/{id}',[CommentController::class,'store']);
+// Route::post('/admin/answer/{id}',[CommentController::class,'update']);
+
+
+Route::get('/user/answerUser/{id}',[CommentController::class,'showDetails']);
+Route::post('/user/answerUser/{id}',[CommentController::class,'storeComment']);
+Route::post('/user/answerUser/{id}',[CommentController::class,'close']);

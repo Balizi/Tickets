@@ -39,14 +39,15 @@
                                       </div>
                                       <div class="card-body">
                                       <p class="card-text mb-2">Content : {{$item['content']}}</p> 
-                                      <a href="{{url("user/dashboard/delete/".$item['id'])}}" class="btn btn-danger">Delete</a>
-                                      <a href="{{url("user/edit/".$item['id'])}}" class="btn btn-warning">Edit</a>
-                                      <a href="{{url("user/edit/".$item['id'])}}" class="btn btn-success">Answer</a>
+                                      {{-- <a href="{{url("user/dashboard/delete/".$item['id'])}}" class="btn btn-danger">Delete</a>
+                                      <a href="{{url("user/edit/".$item['id'])}}" class="btn btn-warning">Edit</a> --}}
+                                      <a href="{{url("user/answerUser/".$item['id'])}}" class="btn btn-success">Answer</a>
                                       </div>
                                       <div class="card-footer">
-                                        Status : {{$item->status->status}}
+                                        Status : {{$item['status']}}
                                       </div>
                                   </div>
+
                                 @endforeach
 
                                 {{-- @foreach ($dataPost as $item)

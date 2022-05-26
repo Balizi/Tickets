@@ -15,14 +15,15 @@
                     <a class="nav-link" aria-current="page" href="{{url('/admin/posts')}}">Show Tickets</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{url('admin/admin')}}">Show Services</a>
+                    <a class="nav-link" aria-current="page" href="{{url('admin/admin')}}">Show Services</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="{{url('/admin/AddService')}}">Add Service</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{{url('/admin/listuser')}}">List Users</a>
+                    <a class="nav-link active" href="{{url('/admin/listuser')}}">List Users</a>
                   </li>
+                  
                 </ul>
               </div>
             </div>
@@ -35,26 +36,29 @@
                 <div class="container mt-5 mb-5">
                     <div class="row">
                       <div class="col-md-6 mx-auto">
-                        <table class="table">
-                          <thead>
-                            <tr>
-                              <th scope="col">#</th>
-                              <th scope="col">Services</th>
-                              <th scope="col">Created At</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            @foreach ($services as $post)
+                        <form action="" method="POST">
+                          @csrf
+                          <table class="table">
+                            <thead>
                               <tr>
-                                <th scope="row">{{$post['id']}}</th>
-                                <td>{{$post['service']}}</td>
-                                <td>{{$post['created_at']}}</td>
-                                <th ><a class="btn btn-danger" href="{{"admin/delete/".$post['id']}}">Delete</a></th>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <th>Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($listuser as $item)
+                              <tr>
+                                <th scope="row">{{$item['id']}}</th>
+                                <td>{{$item['name']}}</td>
+                                <td>{{$item['email']}}</td>
+                                <th ><a class="btn btn-danger" href="{{"deleteuser/".$item['id']}}">Delete</a></th>
                               </tr>
                             @endforeach
-                          </tbody>
-                        </table>
+                            </tbody>
+                          </table>
+                        </form>
                       </div>
                     </div>
                 </div>

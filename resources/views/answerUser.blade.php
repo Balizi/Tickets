@@ -9,13 +9,10 @@
               <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url('/admin/posts')}}">Show Posts</a>
+                    <a class="nav-link active" aria-current="page" href="{{url('user/dashboard')}}">Show Posts</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{url('admin/admin')}}">Show Service</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" href="{{url('admin/AddService')}}">Add Service</a>
+                    <a class="nav-link" href="{{url('user/AddPosts')}}">Add Posts</a>
                   </li>
                 </ul>
               </div>
@@ -30,16 +27,24 @@
                     <div class="row">
                       <div class="col-md-6 mx-auto">
                         <div class="w-full max-w-xs">
-                            @if($postDetails[0]->status === 'fermer')
-                              <button class="btn btn-success" name="fer" style="background-color: rgb(13, 255, 25);color:white;float:right;" type="submit">
-                                Résolu
+                          @if($postDetails[0]->status !== 'fermer')
+                            <form action="{{ url('user/answerUser/'.$postId)}}" method="POST">
+                              @csrf
+                              <button class="btn btn-success" name="fer" style="background-color: Orange;color:white;float:right;" type="submit">
+                                Closed
                               </button>
-                            @endif
+                            </form>
+                          @elseif($postDetails[0]->status === 'fermer')
+                            <button class="btn btn-success" name="fer" style="background-color: rgb(13, 255, 25);color:white;float:right;" type="submit">
+                              Résolu
+                            </button>
+                          @endif
                             <p class="text-center"><strong >Details</strong></p>
                             <h1 class="mb-2"><b>Title</b> : {{$postDetails[0]->title}}</h1>
                             <h2 class="mb-2"><b>Content</b> : {{$postDetails[0]->content}}</h2>
                             <h2 class="mb-2"><b>Status</b> : {{$postDetails[0]->status}}</h2>
                             <p class="text-center"><strong >Comment</strong></p>
+
 
 
                             @foreach($CommentDetail as $cm)
@@ -57,32 +62,33 @@
                                 @endif
                               </table>
                             @endforeach
-
+                             
                             @if($postDetails[0]->status !== 'fermer')
-                              <form class="rounded px-8  pb-8 mb-4" style="margin-top: 70px" action="{{ url('admin/answer/'.$postId)}}" method="POST">
-                                @csrf
-                                <div class="inline-block relative w-64 mb-4">
-                                    <input type="hidden" name="">
-                                  <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                                      Answer
-                                    </label>
-                                  <textarea name="answer"
-                                  class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
-                                    border border-solid border-gray-300 rounded transition ease-in-out m-0
-                                    focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                  id="exampleFormControlTextarea1"
-                                  rows="3"
-                                  placeholder="Your message"></textarea>
+                            <form class="rounded px-8  pb-8 mb-4" style="margin-top: 70px" action="{{ url('user/answerUser/'.$postId)}}" method="POST">
+                              @csrf
+                              <div class="inline-block relative w-64 mb-4">
+                                  <input type="hidden" name="">
+                                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                                    Answer
+                                  </label>
+                                <textarea name="answer"
+                                class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding
+                                  border border-solid border-gray-300 rounded transition ease-in-out m-0
+                                  focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="exampleFormControlTextarea1"
+                                rows="3"
+                                placeholder="Your message"></textarea>
+                              </div>
+                              
+                              <div class="md:flex md:items-center">
+                                <div class="md:w-2/3">
+                                  <button class="btn btn-success" style="background-color: green;color:white;" type="submit">
+                                    Answer
+                                  </button>
+                                  
                                 </div>
-                                
-                                <div class="md:flex md:items-center">
-                                  <div class="md:w-2/3">
-                                    <button class="btn btn-success" style="background-color: green;color:white;" type="submit">
-                                      Answer
-                                    </button>
-                                  </div>
-                                </div>
-                              </form>
+                              </div>
+                            </form>
                             @endif
                           </div>
                       </div>

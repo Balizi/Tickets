@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -22,11 +23,6 @@ class ServiceController extends Controller
             return view('Posts',['data'=>$dataPost]);
         }else{
             //Redirect To Page user and Show Tickets
-            $postAnswer=DB::select("SELECT p.*,c.*  FROM posts p INNER JOIN comments c ON p.id like c.posts_id ORDER BY p.created_at");
-            // return $postAnswer[0]->service;
-            // return view('dashboard',['dataPost'=>$postAnswer]);
-
-            // return $dataPost[0]->service->service;
             return view('dashboard',['dataPost'=>$dataPost]);
         }
     }
@@ -66,5 +62,12 @@ class ServiceController extends Controller
         $data=Service::find($id);
         $data->delete();
         return redirect('admin/admin');
+    }
+
+    public function deleteuser($id)
+    {
+        $data=User::find($id);
+        $data->delete();
+        return redirect('admin/listuser');
     }
 }

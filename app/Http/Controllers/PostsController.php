@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use SebastianBergmann\Environment\Console;
 
 class PostsController extends Controller
 {
@@ -15,13 +18,18 @@ class PostsController extends Controller
         $data=Post::all();
         return view('dashboard',['dataPost'=>$data]);
     }
-
     
 
-    public function try()
+    public function getAll()
     {
         $data=Post::all();
         return view('posts',['data'=>$data]);
+    }
+
+    public function ListUser()
+    {
+        $data=User::where('role','0')->get();
+        return view('listusers',['listuser'=>$data]);
     }
 
     public function posts()
@@ -43,7 +51,7 @@ class PostsController extends Controller
 
         $post->user_id=auth()->user()->id;
         $post->service_id=$request->service;
-        $post->status_id=1;
+        $post->status='nouveau';
 
         $post->save();
         $data=Service::all();
